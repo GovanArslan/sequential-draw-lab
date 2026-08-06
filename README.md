@@ -1,4 +1,4 @@
-#Sequential Draw Lab
+# Sequential Draw Lab
 
 The Sequential Draw Lab models a sequential-draw game. In the initial launch case, two tokens are drawn in order, without replacement, out of a bag. 
 
