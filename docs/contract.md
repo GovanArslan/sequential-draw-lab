@@ -15,9 +15,9 @@
 
 ### Postconditions 
 - Available labels are {R1, ..., Rr} U {B1, ..., Bb}.
-- Returns a tuple of tuples.
 - An additional tuple of tuples is returned. Each inner tuple contains 1 draw.
-- A draw is a tuple containing `k`, it contains distinct valid labels and represents one ordered draw. No valid draw is missing or repeated. Inside a draw no token is repeated.
+- Each inner tuple consists of a draw, it contains distinct valid labels and represents one ordered draw. No valid draw is missing or repeated.
+- Within a draw, no token is repeated.
 - The order in which returned draws appear is not part of the public contract.
  
 ### Invalid inputs
