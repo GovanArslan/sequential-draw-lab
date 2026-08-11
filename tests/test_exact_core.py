@@ -3,10 +3,13 @@ from math import factorial
 import pytest
 
 # Postconditions
-
-@pytest.fixture
-def case():
-    r, b, k = 4, 5, 3
+@pytest.fixture(params=[
+    (4, 5, 3),
+    (2, 2, 2),
+    (0, 4, 3),
+])
+def case(request):
+    r, b, k = request.param
     return enumerate_ordered_draws(r, b, k), r, b, k
 
 def test_repeating_draws(case):
