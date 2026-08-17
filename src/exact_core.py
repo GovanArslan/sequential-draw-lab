@@ -1,3 +1,7 @@
+from collections import Counter
+from collections.abc import Callable
+from fractions import Fraction
+
 def create_draws(labels: tuple[str, ...], k: int) -> tuple[tuple[str, ...], ...]:
     if k == 0:
         return ((), )
@@ -18,4 +22,13 @@ def enumerate_ordered_draws(r: int, b: int, k: int) -> tuple[tuple[str, ...], ..
     return create_draws(labels, k)
 
 
+def red_count(draw: tuple[str, ...]) -> int:
+    return sum(1 for label in draw if label[0] == "R")
+
+def nonlinear_payoff(x: int) -> int:
+    return x**2 - 2 * x - 1
+
+def payoff_pmf(r: int, b: int, k: int, payoff_rule: Callable[[int], int]) -> dict:
+    nonlinear_results = dict(Counter(payoff_rule(red_count(draw)) for draw in enumerate_ordered_draws(r, b, k)))
+    return {key: Fraction(value, sum(nonlinear_results.values())) for key, value in nonlinear_results.items()}
 

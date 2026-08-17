@@ -7,6 +7,7 @@ import pytest
     (4, 5, 3),
     (2, 2, 2),
     (0, 4, 3),
+    (1, 1, 2)
 ])
 def case(request):
     r, b, k = request.param
