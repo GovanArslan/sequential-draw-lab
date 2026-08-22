@@ -1,5 +1,6 @@
-from src.exact_core import enumerate_ordered_draws
+from src.exact_core import enumerate_ordered_draws, payoff_pmf, nonlinear_payoff
 from math import factorial
+from fractions import Fraction
 import pytest
 
 # Postconditions
@@ -15,7 +16,7 @@ def case(request):
 
 def test_repeating_draws(case):
     draws, r, b, k = case
-    assert len(draws) == len(set(draws))
+    assert len(draws) != len(set(draws))
 
 def test_draw_structure(case):
     draws, r, b, k = case
@@ -54,3 +55,15 @@ def test_invalid_type(r, b, k):
 def test_invalid_value(r, b, k):
     with pytest.raises(ValueError):
         enumerate_ordered_draws(r, b, k)
+
+
+# PMF RULE 
+
+@pytest.mark.parametrize(
+    "r, b, k, function",
+    [
+        (3, 4, 2, lambda x: 100 * x),
+    ]
+) 
+def test_payoff_pmf(r, b, k, function):
+    assert payoff_pmf(r, b, k, function) == {0: Fraction(12,42), 100: Fraction(24,42), 200: Fraction(6,42)}
